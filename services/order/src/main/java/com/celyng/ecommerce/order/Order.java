@@ -4,10 +4,7 @@ package com.celyng.ecommerce.order;
 
 import com.celyng.ecommerce.orderline.OrderLine;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,6 +19,7 @@ import static jakarta.persistence.EnumType.STRING;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "customer_order")
