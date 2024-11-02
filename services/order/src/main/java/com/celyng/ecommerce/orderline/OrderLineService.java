@@ -4,6 +4,8 @@ import com.celyng.ecommerce.order.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class OrderLineService {
@@ -16,5 +18,12 @@ public class OrderLineService {
         var orderLine =  mapper.toOrderLine(orderLineRequest);
         return repository.save(orderLine).getId();
 
+    }
+
+    public List<OrderLineResponse> findAllByOrderId(Integer orderId) {
+        return repository.findAllByOrderId(orderId)
+                .stream()
+                .map(mapper::toOrderLineResponse)
+                .toList();
     }
 }
