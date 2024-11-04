@@ -7,6 +7,8 @@ import com.celyng.ecommerce.kafka.OrderConfirmation;
 import com.celyng.ecommerce.kafka.OrderProducer;
 import com.celyng.ecommerce.orderline.OrderLineRequest;
 import com.celyng.ecommerce.orderline.OrderLineService;
+import com.celyng.ecommerce.payment.PaymentClient;
+import com.celyng.ecommerce.payment.PaymentRequest;
 import com.celyng.ecommerce.product.ProductClient;
 import com.celyng.ecommerce.product.PurchaseRequest;
 import jakarta.persistence.EntityNotFoundException;
@@ -23,8 +25,10 @@ public class OrderService {
 
     private final OrderMapper mapper;
     private final OrderRepository repository;
+
     private final CustomerClient customerClient;
     private final ProductClient productClient;
+    private final PaymentClient paymentClient;
 
     private final OrderProducer orderProducer;
 
@@ -54,8 +58,15 @@ public class OrderService {
                     )
             );
         }
-        //TODO Payment Process
-
+        //Payment Proces
+        var paymentRequest = new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
 
         //Send the order confirmation  ---> notification-ms  (Kafka)
         orderProducer.sendOrderConfirmation(
