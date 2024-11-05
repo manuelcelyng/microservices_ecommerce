@@ -1,10 +1,8 @@
-package com.celyng.ecommerce.notification;
-
-import com.celyng.ecommerce.payment.PaymentMethod;
+package com.celyng.ecommerce.kafka.payment;
 
 import java.math.BigDecimal;
 
-public record PaymentNotificationRequest(
+public record PaymentConfirmation(
         String orderReference,
         BigDecimal amount,
         PaymentMethod paymentMethod,
