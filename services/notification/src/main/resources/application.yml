@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: notification-service
+
+  data:
+    mongodb:
+      username:
+      password:
+      host:
+      port:
+      database:
+      authentication-database:
+
+
+server:
+  port:   

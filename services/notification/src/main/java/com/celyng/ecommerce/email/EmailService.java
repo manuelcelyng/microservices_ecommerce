@@ -33,11 +33,11 @@ public class EmailService {
             BigDecimal amount,
             String orderReference
     ) throws MessagingException {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper =
+        MimeMessage mimeMessage = mailSender.createMimeMessage(); // El mensaje
+        MimeMessageHelper messageHelper = // Nos ayuda a construir el mensaje
                 new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
 
-        messageHelper.setFrom("fernandocly18@gmail.com");
+        messageHelper.setFrom("fernandocly18@gmail.com"); // Correo desde el cual se enviará el email
 
         final String templateName = EmailTemplates.PAYMENT_CONFIRMATION.getTemplate();
 
