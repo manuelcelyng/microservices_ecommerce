@@ -24,6 +24,7 @@ import static jakarta.persistence.EnumType.STRING;
 @Table(name = "payment")
 public class Payment {
     @Id
+    @GeneratedValue
     private Integer id;
 
     private BigDecimal amount;
@@ -37,7 +38,7 @@ public class Payment {
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Column(insertable = false,nullable = false)
+    @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
 
 
